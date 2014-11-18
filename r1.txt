@@ -1,0 +1,12 @@
+Team Name: Team Canada
+
+Student 1 Name: Sina Zargaran
+Student 1 Student Number: 998363621
+Student 1 Email: sina.zargaran@utoronto.ca
+
+Student 2 Name: Allan Jonhs
+Student 2 Student Number: 
+Student 2 Email: allan.johns@utoronto.ca
+
+
+ Thread created successfully
