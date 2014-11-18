@@ -22,7 +22,7 @@ team_t team = {
     "sina.zargaran@utoronto.ca",  /* First member email address */
 
     "Allan Jonhs",                /* Second member full name */
-    "",                           /* Second member student number */
+    "998256603",                           /* Second member student number */
     "allan.johns@utoronto.ca"     /* Second member email address */
 };
 
@@ -74,16 +74,18 @@ void* process_seed_streams(void* arg) {
 		  // force the sample to be within the range of 0..RAND_NUM_UPPER_BOUND-1
 		  key = rnum % RAND_NUM_UPPER_BOUND;
 
-		  // if this sample has not been counted before
-		  if (!(s = h.lookup(key))){
+		  __transaction_atomic {
+			  // if this sample has not been counted before
+			  if (!(s = h.lookup(key))){
 
-			// insert a new element for it into the hash table
-			s = new sample(key);
-			h.insert(s);
+				// insert a new element for it into the hash table
+				s = new sample(key);
+				h.insert(s);
+			  }
+
+			  // increment the count for the sample
+			  s->count++;
 		  }
-
-		  // increment the count for the sample
-		  s->count++;
 		}
 	}
 }

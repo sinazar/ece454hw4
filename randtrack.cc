@@ -14,15 +14,15 @@
  * Please fill in the following team struct 
  */
 team_t team = {
-    "Team Name",                  /* Team name */
+    "Team Canada",                /* Team name */
 
-    "AAA BBB",                    /* First member full name */
-    "9999999999",                 /* First member student number */
-    "AAABBB@CCC",                 /* First member email address */
+    "Sina Zargaran",              /* First member full name */
+    "998363621",                  /* First member student number */
+    "sina.zargaran@utoronto.ca",  /* First member email address */
 
-    "",                           /* Second member full name */
-    "",                           /* Second member student number */
-    ""                            /* Second member email address */
+    "Allan Jonhs",                /* Second member full name */
+    "998256603",                           /* Second member student number */
+    "allan.johns@utoronto.ca"     /* Second member email address */
 };
 
 unsigned num_threads;

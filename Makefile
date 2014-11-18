@@ -11,7 +11,7 @@ randtrack_global_lock: list.h hash.h defs.h randtrack_global_lock.cc
 	$(CC) $(CFLAGS) -lpthread randtrack_global_lock.cc -o randtrack_global_lock
 	
 randtrack_tm: list.h hash.h defs.h randtrack_tm.cc
-	$(CC) $(CFLAGS) -lpthread randtrack_tm.cc -o randtrack_tm
+	$(CC) $(CFLAGS) -lpthread -fgnu-tm randtrack_tm.cc -o randtrack_tm
 	
 randtrack_list_lock: list.h hash.h defs.h randtrack_list_lock.cc
 	$(CC) $(CFLAGS) -lpthread randtrack_list_lock.cc -o randtrack_list_lock
