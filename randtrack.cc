@@ -36,7 +36,7 @@ class sample {
   sample *next;
   unsigned count;
 
-  sample(unsigned the_key){my_key = the_key; count = 0;};
+  sample(unsigned the_key){my_key = the_key; count = 0; next = NULL;};
   unsigned key(){return my_key;}
   void print(FILE *f){printf("%d %d\n",my_key,count);}
 };

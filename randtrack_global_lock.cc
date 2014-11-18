@@ -12,7 +12,7 @@
 
 /* 
  * ECE454 Students: 
- * Please fill in the following team struct 
+ * Please fill in the following team struct
  */
 team_t team = {
     "Team Canada",                /* Team name */
