@@ -118,6 +118,7 @@ main (int argc, char* argv[]){
   sscanf(argv[2], " %d", &samples_to_skip);
 
   pthread_t tid[num_threads];
+  int indices[num_threads];
   int err;
 
   // initialize a 16K-entry (2**14) hash of empty lists
@@ -127,8 +128,8 @@ main (int argc, char* argv[]){
 	  //Create threads for the number of threads specified
 	  int i;
 	  for (i=0; i < num_threads; i++) {
-		  int thread_num = i;
-		  err = pthread_create(&(tid[i]), NULL, process_seed_streams, (void*)&thread_num);
+		  indices[i] = i;
+		  err = pthread_create(&(tid[i]), NULL, process_seed_streams, (void*)&indices[i]);
 		  if (err) {
 			  printf("\ncan't create thread :[%d]\n", err);
 			  exit(EXIT_FAILURE);

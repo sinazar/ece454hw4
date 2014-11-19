@@ -1,0 +1,14 @@
+make
+
+./randtrack 4 4 > rt1.out
+./randtrack_global_lock 4 4 > rt2.out
+./randtrack_tm 4 4 > rt3.out
+./randtrack_list_lock 4 4 > rt4.out
+sort -n rt1.out > rt1.outs
+sort -n rt2.out > rt2.outs
+sort -n rt3.out > rt3.outs
+sort -n rt4.out > rt4.outs
+diff rt1.outs rt2.outs
+diff rt1.outs rt3.outs
+diff rt1.outs rt4.outs
+

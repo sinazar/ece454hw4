@@ -1,0 +1,4 @@
+./randtrack_list_lock 4 4 > rt4.out
+sort -n rt4.out > rt4.outs
+diff rt1.outs rt4.outs
+

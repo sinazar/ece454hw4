@@ -22,13 +22,18 @@ team_t team = {
     "sina.zargaran@utoronto.ca",  /* First member email address */
 
     "Allan Jonhs",                /* Second member full name */
-    "998256603",                           /* Second member student number */
+    "998256603",                  /* Second member student number */
     "allan.johns@utoronto.ca"     /* Second member email address */
 };
 
 unsigned num_threads;
 unsigned samples_to_skip;
-pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+
+unsigned my_size = 1 << 14;
+unsigned my_size_mask = (1 << 14) - 1;
+
+//create an array of locks same size as the hash array
+pthread_mutex_t lock[16384];
 
 class sample;
 
@@ -75,10 +80,11 @@ void* process_seed_streams(void* arg) {
 		  // force the sample to be within the range of 0..RAND_NUM_UPPER_BOUND-1
 		  key = rnum % RAND_NUM_UPPER_BOUND;
 
-		  pthread_mutex_lock(&lock);
+		  pthread_mutex_lock(&lock[HASH_INDEX(key,my_size_mask)]);
 
 		  // if this sample has not been counted before
 		  if (!(s = h.lookup(key))){
+
 
 			// insert a new element for it into the hash table
 			s = new sample(key);
@@ -88,7 +94,7 @@ void* process_seed_streams(void* arg) {
 		  // increment the count for the sample
 		  s->count++;
 
-		  pthread_mutex_unlock(&lock);
+		  pthread_mutex_unlock(&lock[HASH_INDEX(key,my_size_mask)]);
 		}
 	}
 	return NULL;
@@ -117,18 +123,25 @@ main (int argc, char* argv[]){
   sscanf(argv[1], " %d", &num_threads); // not used in this single-threaded version
   sscanf(argv[2], " %d", &samples_to_skip);
 
-  pthread_t tid[num_threads];
-  int err;
+  // initialize the lock array
+  for (int i = 0; i < my_size; i++)
+	  pthread_mutex_init(&lock[i], NULL);
 
   // initialize a 16K-entry (2**14) hash of empty lists
   h.setup(14);
+
+  // create an array of threads
+  pthread_t tid[num_threads];
+  // create an array of the thread indices
+  int indices[num_threads];
+  int err;
 
   if (num_threads == 1 || num_threads == 2 || num_threads == 4){
 	  //Create threads for the number of threads specified
 	  int i;
 	  for (i=0; i < num_threads; i++) {
-		  int thread_num = i;
-		  err = pthread_create(&(tid[i]), NULL, process_seed_streams, (void*)&thread_num);
+		  indices[i] = i;
+		  err = pthread_create(&(tid[i]), NULL, process_seed_streams, (void*)&indices[i]);
 		  if (err) {
 			  printf("\ncan't create thread :[%d]\n", err);
 			  exit(EXIT_FAILURE);

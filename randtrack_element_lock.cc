@@ -12,7 +12,7 @@
 
 /* 
  * ECE454 Students: 
- * Please fill in the following team struct 
+ * Please fill in the following team struct
  */
 team_t team = {
     "Team Canada",                /* Team name */
@@ -22,12 +22,18 @@ team_t team = {
     "sina.zargaran@utoronto.ca",  /* First member email address */
 
     "Allan Jonhs",                /* Second member full name */
-    "998256603",                           /* Second member student number */
+    "998256603",                  /* Second member student number */
     "allan.johns@utoronto.ca"     /* Second member email address */
 };
 
 unsigned num_threads;
 unsigned samples_to_skip;
+
+unsigned my_size = 1 << 14;
+unsigned my_size_mask = (1 << 14) - 1;
+
+//create an array of locks same size as the hash array
+pthread_mutex_t lock[16384];
 
 class sample;
 
@@ -36,8 +42,9 @@ class sample {
  public:
   sample *next;
   unsigned count;
+  pthread_mutex_t element_lock;
 
-  sample(unsigned the_key){my_key = the_key; count = 0; next = NULL;};
+  sample(unsigned the_key){my_key = the_key; count = 0; next = NULL; element_lock = PTHREAD_MUTEX_INITIALIZER;};
   unsigned key(){return my_key;}
   void print(FILE *f){printf("%d %d\n",my_key,count);}
 };
@@ -74,18 +81,21 @@ void* process_seed_streams(void* arg) {
 		  // force the sample to be within the range of 0..RAND_NUM_UPPER_BOUND-1
 		  key = rnum % RAND_NUM_UPPER_BOUND;
 
-		  __transaction_atomic {
-			  // if this sample has not been counted before
-			  if (!(s = h.lookup(key))){
+		  // if this sample has not been counted before
+		  if (!(s = h.lookup(key))){
 
-				// insert a new element for it into the hash table
-				s = new sample(key);
-				h.insert(s);
-			  }
 
-			  // increment the count for the sample
-			  s->count++;
+			// insert a new element for it into the hash table
+			s = new sample(key);
+			pthread_mutex_lock(&lock[HASH_INDEX(key,my_size_mask)]);
+			h.insert(s);
+			pthread_mutex_unlock(&lock[HASH_INDEX(key,my_size_mask)]);
 		  }
+
+		  // increment the count for the sample
+		  pthread_mutex_lock (&s->element_lock);
+		  s->count++;
+		  pthread_mutex_unlock (&s->element_lock);
 		}
 	}
 	return NULL;
@@ -114,12 +124,18 @@ main (int argc, char* argv[]){
   sscanf(argv[1], " %d", &num_threads); // not used in this single-threaded version
   sscanf(argv[2], " %d", &samples_to_skip);
 
-  pthread_t tid[num_threads];
-  int indices[num_threads];
-  int err;
+  // initialize the lock array
+  for (int i = 0; i < my_size; i++)
+	  pthread_mutex_init(&lock[i], NULL);
 
   // initialize a 16K-entry (2**14) hash of empty lists
   h.setup(14);
+
+  // create an array of threads
+  pthread_t tid[num_threads];
+  // create an array of the thread indices
+  int indices[num_threads];
+  int err;
 
   if (num_threads == 1 || num_threads == 2 || num_threads == 4){
 	  //Create threads for the number of threads specified
@@ -134,6 +150,7 @@ main (int argc, char* argv[]){
 		  else
 			  printf("\n Thread created successfully\n");
 	  }
+
 	  for (i=0; i < num_threads; i++) {
 		  pthread_join(tid[i], NULL);
 	  }
