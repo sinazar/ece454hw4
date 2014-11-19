@@ -4,7 +4,7 @@
 #include <pthread.h>
 
 #include "defs.h"
-#include "hash.h"
+#include "hash_reduction.h"
 
 #define SAMPLES_TO_COLLECT   10000000
 #define RAND_NUM_UPPER_BOUND   100000
@@ -42,9 +42,8 @@ class sample {
  public:
   sample *next;
   unsigned count;
-  pthread_mutex_t element_lock;
 
-  sample(unsigned the_key){my_key = the_key; count = 0; next = NULL; element_lock = PTHREAD_MUTEX_INITIALIZER;};
+  sample(unsigned the_key){my_key = the_key; count = 0; next = NULL;};
   unsigned key(){return my_key;}
   void print(FILE *f){printf("%d %d\n",my_key,count);}
 };
@@ -53,7 +52,8 @@ class sample {
 // it is a C++ template, which means we define the types for
 // the element and key value here: element is "class sample" and
 // key value is "unsigned".  
-hash<sample,unsigned> h;
+hash<sample, unsigned> h;
+hash<sample, unsigned> *h_local;
 
 void* process_seed_streams(void* arg) {
 	int thread_num = *((int*)arg);
@@ -82,20 +82,16 @@ void* process_seed_streams(void* arg) {
 		  key = rnum % RAND_NUM_UPPER_BOUND;
 
 		  // if this sample has not been counted before
-		  if (!(s = h.lookup(key))){
+		  if (!(s = h_local[thread_num].lookup(key))){
 
 
 			// insert a new element for it into the hash table
 			s = new sample(key);
-			pthread_mutex_lock(&lock[HASH_INDEX(key,my_size_mask)]);
-			h.insert(s);
-			pthread_mutex_unlock(&lock[HASH_INDEX(key,my_size_mask)]);
+			h_local[thread_num].insert(s);
 		  }
 
 		  // increment the count for the sample
-		  pthread_mutex_lock (&s->element_lock);
 		  s->count++;
-		  pthread_mutex_unlock (&s->element_lock);
 		}
 	}
 	return NULL;
@@ -125,11 +121,12 @@ main (int argc, char* argv[]){
   sscanf(argv[2], " %d", &samples_to_skip);
 
   // initialize the lock array
-  for (int i = 0; i < my_size; i++)
-	  pthread_mutex_init(&lock[i], NULL);
+//  for (int i = 0; i < my_size; i++)
+//	  pthread_mutex_init(&lock[i], NULL);
 
   // initialize a 16K-entry (2**14) hash of empty lists
   h.setup(14);
+  h_local = new hash<sample, unsigned>[num_threads];
 
   // create an array of threads
   pthread_t tid[num_threads];
@@ -141,14 +138,16 @@ main (int argc, char* argv[]){
 	  //Create threads for the number of threads specified
 	  int i;
 	  for (i=0; i < num_threads; i++) {
+		  h_local[i].setup(14);
+
 		  indices[i] = i;
 		  err = pthread_create(&(tid[i]), NULL, process_seed_streams, (void*)&indices[i]);
 		  if (err) {
 			  printf("\ncan't create thread :[%d]\n", err);
 			  exit(EXIT_FAILURE);
 		  }
-		  else
-			  printf("\n Thread created successfully\n");
+//		  else
+//			  printf("\n Thread created successfully\n");
 	  }
 
 	  for (i=0; i < num_threads; i++) {
@@ -158,6 +157,17 @@ main (int argc, char* argv[]){
 	  printf ("\nWrong number of threads specified.\n");
 	  exit(0);
   }
+
+  /*
+   * merge the local hash tables
+   */
+
+
+
+  for (int i=0; i < num_threads; i++) {
+	  h.merge(&h_local[i]);
+  }
+
   // print a list of the frequency of all samples
   h.print();
 }

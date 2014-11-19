@@ -131,8 +131,8 @@ main (int argc, char* argv[]){
 			  printf("\ncan't create thread :[%d]\n", err);
 			  exit(EXIT_FAILURE);
 		  }
-		  else
-			  printf("\n Thread created successfully\n");
+//		  else
+//			  printf("\n Thread created successfully\n");
 	  }
 	  for (i=0; i < num_threads; i++) {
 		  pthread_join(tid[i], NULL);

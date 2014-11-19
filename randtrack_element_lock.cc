@@ -87,9 +87,18 @@ void* process_seed_streams(void* arg) {
 
 			// insert a new element for it into the hash table
 			s = new sample(key);
+			sample * temp;
 			pthread_mutex_lock(&lock[HASH_INDEX(key,my_size_mask)]);
-			h.insert(s);
-			pthread_mutex_unlock(&lock[HASH_INDEX(key,my_size_mask)]);
+			if (!(temp = h.lookup(key))) {
+				h.insert(s);
+				pthread_mutex_unlock(&lock[HASH_INDEX(key,my_size_mask)]);
+			}
+			else {
+				pthread_mutex_unlock(&lock[HASH_INDEX(key,my_size_mask)]);
+				delete(s);
+				s = temp;
+			}
+
 		  }
 
 		  // increment the count for the sample
@@ -147,8 +156,8 @@ main (int argc, char* argv[]){
 			  printf("\ncan't create thread :[%d]\n", err);
 			  exit(EXIT_FAILURE);
 		  }
-		  else
-			  printf("\n Thread created successfully\n");
+//		  else
+//			  printf("\n Thread created successfully\n");
 	  }
 
 	  for (i=0; i < num_threads; i++) {
