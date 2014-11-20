@@ -1,0 +1,11 @@
+STARTING ...
+17.69user 0.00system 0:17.73elapsed 99%CPU (0avgtext+0avgdata 1792maxresident)k
+0inputs+240outputs (0major+504minor)pagefaults 0swaps
+17.69user 0.00system 0:17.73elapsed 99%CPU (0avgtext+0avgdata 1792maxresident)k
+0inputs+248outputs (0major+503minor)pagefaults 0swaps
+17.68user 0.00system 0:17.71elapsed 99%CPU (0avgtext+0avgdata 1796maxresident)k
+0inputs+248outputs (0major+504minor)pagefaults 0swaps
+17.69user 0.00system 0:17.72elapsed 99%CPU (0avgtext+0avgdata 1800maxresident)k
+0inputs+248outputs (0major+505minor)pagefaults 0swaps
+17.69user 0.00system 0:17.72elapsed 99%CPU (0avgtext+0avgdata 1796maxresident)k
+0inputs+240outputs (0major+504minor)pagefaults 0swaps

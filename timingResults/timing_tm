@@ -1,0 +1,33 @@
+NUMBER OF THREAD = 1
+21.06user 0.00system 0:21.12elapsed 99%CPU (0avgtext+0avgdata 1900maxresident)k
+272inputs+240outputs (1major+529minor)pagefaults 0swaps
+21.06user 0.00system 0:21.09elapsed 99%CPU (0avgtext+0avgdata 1904maxresident)k
+0inputs+248outputs (0major+531minor)pagefaults 0swaps
+21.06user 0.00system 0:21.09elapsed 99%CPU (0avgtext+0avgdata 1908maxresident)k
+0inputs+248outputs (0major+532minor)pagefaults 0swaps
+21.07user 0.00system 0:21.11elapsed 99%CPU (0avgtext+0avgdata 1904maxresident)k
+0inputs+248outputs (0major+531minor)pagefaults 0swaps
+21.07user 0.00system 0:21.11elapsed 99%CPU (0avgtext+0avgdata 1904maxresident)k
+0inputs+240outputs (0major+531minor)pagefaults 0swaps
+NUMBER OF THREAD = 2
+41.34user 0.00system 0:20.70elapsed 199%CPU (0avgtext+0avgdata 1944maxresident)k
+0inputs+248outputs (0major+701minor)pagefaults 0swaps
+41.34user 0.00system 0:20.71elapsed 199%CPU (0avgtext+0avgdata 2056maxresident)k
+0inputs+248outputs (0major+702minor)pagefaults 0swaps
+41.43user 0.00system 0:20.75elapsed 199%CPU (0avgtext+0avgdata 1940maxresident)k
+0inputs+248outputs (0major+700minor)pagefaults 0swaps
+41.50user 0.00system 0:20.79elapsed 199%CPU (0avgtext+0avgdata 1936maxresident)k
+0inputs+240outputs (0major+700minor)pagefaults 0swaps
+41.48user 0.00system 0:20.77elapsed 199%CPU (0avgtext+0avgdata 1940maxresident)k
+0inputs+248outputs (0major+700minor)pagefaults 0swaps
+NUMBER OF THREAD = 4
+53.17user 0.00system 0:13.41elapsed 396%CPU (0avgtext+0avgdata 1976maxresident)k
+0inputs+248outputs (0major+667minor)pagefaults 0swaps
+53.81user 0.00system 0:13.66elapsed 393%CPU (0avgtext+0avgdata 1988maxresident)k
+0inputs+248outputs (0major+665minor)pagefaults 0swaps
+45.42user 0.00system 0:11.65elapsed 389%CPU (0avgtext+0avgdata 1984maxresident)k
+0inputs+248outputs (0major+710minor)pagefaults 0swaps
+51.91user 0.00system 0:13.15elapsed 394%CPU (0avgtext+0avgdata 1984maxresident)k
+0inputs+240outputs (0major+712minor)pagefaults 0swaps
+54.39user 0.00system 0:13.96elapsed 389%CPU (0avgtext+0avgdata 1972maxresident)k
+0inputs+248outputs (0major+712minor)pagefaults 0swaps

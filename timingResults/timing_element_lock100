@@ -1,0 +1,34 @@
+STARTING ...
+NUMBER OF THREAD = 1
+36.80user 0.00system 0:36.84elapsed 99%CPU (0avgtext+0avgdata 2976maxresident)k
+0inputs+240outputs (0major+799minor)pagefaults 0swaps
+36.79user 0.00system 0:36.83elapsed 99%CPU (0avgtext+0avgdata 2976maxresident)k
+0inputs+240outputs (0major+800minor)pagefaults 0swaps
+36.80user 0.00system 0:36.84elapsed 99%CPU (0avgtext+0avgdata 2976maxresident)k
+0inputs+248outputs (0major+799minor)pagefaults 0swaps
+36.78user 0.00system 0:36.81elapsed 99%CPU (0avgtext+0avgdata 2976maxresident)k
+0inputs+240outputs (0major+799minor)pagefaults 0swaps
+36.80user 0.00system 0:36.83elapsed 99%CPU (0avgtext+0avgdata 2976maxresident)k
+0inputs+248outputs (0major+799minor)pagefaults 0swaps
+NUMBER OF THREAD = 2
+37.40user 0.00system 0:18.80elapsed 198%CPU (0avgtext+0avgdata 2988maxresident)k
+0inputs+240outputs (0major+802minor)pagefaults 0swaps
+37.40user 0.00system 0:18.80elapsed 198%CPU (0avgtext+0avgdata 2988maxresident)k
+0inputs+248outputs (0major+802minor)pagefaults 0swaps
+37.38user 0.00system 0:18.80elapsed 198%CPU (0avgtext+0avgdata 2984maxresident)k
+0inputs+240outputs (0major+801minor)pagefaults 0swaps
+37.41user 0.00system 0:18.81elapsed 198%CPU (0avgtext+0avgdata 2988maxresident)k
+0inputs+248outputs (0major+802minor)pagefaults 0swaps
+37.41user 0.00system 0:18.81elapsed 198%CPU (0avgtext+0avgdata 2988maxresident)k
+0inputs+240outputs (0major+802minor)pagefaults 0swaps
+NUMBER OF THREAD = 4
+41.45user 0.00system 0:10.42elapsed 397%CPU (0avgtext+0avgdata 3016maxresident)k
+0inputs+248outputs (0major+810minor)pagefaults 0swaps
+41.42user 0.00system 0:10.41elapsed 397%CPU (0avgtext+0avgdata 3016maxresident)k
+0inputs+240outputs (0major+809minor)pagefaults 0swaps
+41.61user 0.00system 0:10.45elapsed 397%CPU (0avgtext+0avgdata 3020maxresident)k
+0inputs+248outputs (0major+810minor)pagefaults 0swaps
+41.55user 0.00system 0:10.45elapsed 397%CPU (0avgtext+0avgdata 3024maxresident)k
+0inputs+240outputs (0major+811minor)pagefaults 0swaps
+41.48user 0.00system 0:10.44elapsed 397%CPU (0avgtext+0avgdata 3016maxresident)k
+0inputs+248outputs (0major+809minor)pagefaults 0swaps

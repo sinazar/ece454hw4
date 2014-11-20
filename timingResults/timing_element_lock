@@ -1,0 +1,33 @@
+NUMBER OF THREAD = 1
+19.32user 0.00system 0:19.36elapsed 99%CPU (0avgtext+0avgdata 2992maxresident)k
+24inputs+240outputs (0major+803minor)pagefaults 0swaps
+19.33user 0.00system 0:19.39elapsed 99%CPU (0avgtext+0avgdata 2984maxresident)k
+0inputs+248outputs (0major+801minor)pagefaults 0swaps
+19.33user 0.00system 0:19.36elapsed 99%CPU (0avgtext+0avgdata 2988maxresident)k
+0inputs+248outputs (0major+802minor)pagefaults 0swaps
+19.33user 0.00system 0:19.37elapsed 99%CPU (0avgtext+0avgdata 2988maxresident)k
+0inputs+248outputs (0major+802minor)pagefaults 0swaps
+19.34user 0.00system 0:19.37elapsed 99%CPU (0avgtext+0avgdata 2988maxresident)k
+0inputs+240outputs (0major+802minor)pagefaults 0swaps
+NUMBER OF THREAD = 2
+20.06user 0.00system 0:10.11elapsed 198%CPU (0avgtext+0avgdata 3000maxresident)k
+0inputs+248outputs (0major+805minor)pagefaults 0swaps
+20.05user 0.00system 0:10.11elapsed 198%CPU (0avgtext+0avgdata 2996maxresident)k
+0inputs+248outputs (0major+805minor)pagefaults 0swaps
+20.06user 0.00system 0:10.11elapsed 198%CPU (0avgtext+0avgdata 3000maxresident)k
+0inputs+248outputs (0major+805minor)pagefaults 0swaps
+20.05user 0.00system 0:10.11elapsed 198%CPU (0avgtext+0avgdata 3000maxresident)k
+0inputs+240outputs (0major+805minor)pagefaults 0swaps
+20.06user 0.01system 0:10.10elapsed 198%CPU (0avgtext+0avgdata 3000maxresident)k
+0inputs+248outputs (0major+805minor)pagefaults 0swaps
+NUMBER OF THREAD = 4
+24.53user 0.00system 0:06.21elapsed 394%CPU (0avgtext+0avgdata 3028maxresident)k
+0inputs+248outputs (0major+812minor)pagefaults 0swaps
+24.47user 0.00system 0:06.18elapsed 395%CPU (0avgtext+0avgdata 3024maxresident)k
+0inputs+248outputs (0major+811minor)pagefaults 0swaps
+24.39user 0.00system 0:06.15elapsed 396%CPU (0avgtext+0avgdata 3028maxresident)k
+0inputs+248outputs (0major+812minor)pagefaults 0swaps
+24.44user 0.00system 0:06.17elapsed 395%CPU (0avgtext+0avgdata 3036maxresident)k
+0inputs+240outputs (0major+814minor)pagefaults 0swaps
+24.39user 0.00system 0:06.15elapsed 396%CPU (0avgtext+0avgdata 3016maxresident)k
+0inputs+248outputs (0major+810minor)pagefaults 0swaps
